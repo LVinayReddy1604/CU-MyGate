@@ -1,0 +1,304 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1E1E"
+    tools:context=".FormActivity">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:background="#50FFFFFF"
+        android:contentDescription="Back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#2E2E2E">
+
+            <!-- Guest Name -->
+            <TextView
+                android:id="@+id/tvGuestNameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guest Name"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter name"
+                android:inputType="text"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FFFFFF" />
+
+            <!-- Purpose of Meeting -->
+            <TextView
+                android:id="@+id/tvPurposeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Purpose of Meeting:"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etPurpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g Food/Agency"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FFFFFF" />
+
+            <!-- Guest Status -->
+            <TextView
+                android:id="@+id/tvGuestStatusLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guest Status"
+                android:textColor="#FFFFFF" />
+
+            <RadioGroup
+                android:id="@+id/rgGuestStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbStandard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Standard"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rbHonored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Honored"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#FFFFFF"
+                    android:layout_marginStart="16dp" />
+            </RadioGroup>
+
+            <!-- Received by -->
+            <TextView
+                android:id="@+id/tvReceivedByLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Received by"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etReceivedBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Student Co-ordinator"
+                android:inputType="text"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
+                android:importantForAutofill="no"
+                android:autofillHints="name" />
+
+            <!-- Select Date and Time -->
+            <TextView
+                android:id="@+id/tvDateTimeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Date and Time"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textColorHint="#AAAAAA"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:focusable="false" />
+
+                <EditText
+                    android:id="@+id/etTime"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00"
+                    android:inputType="none"
+                    android:textColorHint="#AAAAAA"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:focusable="false"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Phone -->
+            <TextView
+                android:id="@+id/tvPhoneLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitor/Teacher Phone"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter phone"
+                android:inputType="phone"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FFFFFF" />
+
+            <!-- Email -->
+
+            <TextView
+                android:id="@+id/tvEmailLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitor/Teacher Email"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
+                android:importantForAutofill="yes"
+                android:autofillHints="emailAddress" />
+
+<!--            Assisted By-->
+            <TextView
+                android:id="@+id/tvAssistLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitor Assisted by"
+                android:textColor="#FFFFFF" />
+
+            <!-- Entered Through -->
+            <EditText
+                android:id="@+id/etAssist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="Number of Visitors"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA" />
+
+            <TextView
+                android:id="@+id/tvEnteredThroughLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entering Through Gate"
+                android:textColor="#FFFFFF" />
+
+            <Spinner
+                android:id="@+id/spinnerEnteredThrough"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="#FFFFFF" />
+
+<!--             City -->
+<!--            <TextView-->
+<!--                android:id="@+id/tvCityLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="City"-->
+<!--                android:textColor="#FFFFFF" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/etCity"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Enter city"-->
+<!--                android:inputType="text"-->
+<!--                android:textColorHint="#AAAAAA"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:backgroundTint="#FFFFFF" />-->
+
+<!--             Country -->
+<!--            <TextView-->
+<!--                android:id="@+id/tvCountryLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Country"-->
+<!--                android:textColor="#FFFFFF" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/etCountry"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Enter country"-->
+<!--                android:inputType="text"-->
+<!--                android:textColorHint="#AAAAAA"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:backgroundTint="#FFFFFF" />-->
+
+            <!-- Add Visitor Image -->
+            <TextView
+                android:id="@+id/tvImageLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitor Image"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Image"
+                android:backgroundTint="#3F51B5"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="8dp" />
+
+            <ImageView
+                android:id="@+id/ivSelectedImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="Selected Image"
+                android:visibility="gone" />
+
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:backgroundTint="#3F51B5"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/ivSelectedImage" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

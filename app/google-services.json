@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "346388689686",
+    "firebase_url": "https://cu-mygate-default-rtdb.firebaseio.com",
+    "project_id": "cu-mygate",
+    "storage_bucket": "cu-mygate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346388689686:android:494bb8fabe0842853d5637",
+        "android_client_info": {
+          "package_name": "com.example.cu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEAwK7r6gjaND8LzFSXn7N0t2R9xRnvDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346388689686:android:109e140592441c143d5637",
+        "android_client_info": {
+          "package_name": "com.example.seeyouu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEAwK7r6gjaND8LzFSXn7N0t2R9xRnvDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346388689686:android:1ddd552b21a717933d5637",
+        "android_client_info": {
+          "package_name": "com.example.specialization_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEAwK7r6gjaND8LzFSXn7N0t2R9xRnvDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

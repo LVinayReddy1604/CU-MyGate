@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Christ Visitor</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string-array name="gate_array">
+        <item>Gate 1</item>
+        <item>Gate 2</item>
+        <item>Gate 3</item>
+    </string-array>
+    <string name="date_format">%1$s/%2$s/%3$d</string>
+    <string name="time_format">%1$s:%2$s</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="logo">LOGO</string>
+    <string name="sign_in_to_nmanage_and_track_your_visitors">Sign in to\nManage and Track your visitors</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="department_image">Department Image</string>
+    <string name="department_name">Department Name</string>
+    <string name="department_icon">Department Icon</string>
+
+    <string name="visitor_image_description">Visitor Image</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="date_time_format">%1$s %2$s</string>
+    <string name="failed_to_load_image">Failed to load image</string>
+    <string name="failed_to_fetch_details">Failed to fetch visitor details</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    tools:context=".OptionalActivity">
+    <!-- Logo at the top right corner -->
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:src="@drawable/christlogo"
+        android:contentDescription="@string/app_name" />
+
+    <!-- Gate Image -->
+    <ImageView
+        android:id="@+id/iv_gate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/gate" />
+
+    <!-- Subtitle Text -->
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_gate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Optional Screen"
+        android:textColor="#B8B8B8"
+        android:textSize="16sp" />
+
+    <!-- View Text -->
+    <TextView
+        android:id="@+id/tv_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_subtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="View"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <!-- Teacher's Dashboard Button -->
+    <Button
+        android:id="@+id/btn_teacher_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_view"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_background"
+        android:text="Teacher's Dashboard"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Chief Security's Dashboard Button -->
+    <Button
+        android:id="@+id/btn_chief_security_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_teacher_dashboard"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_background"
+        android:text="Chief Security's Dashboard"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Security's Dashboard Button -->
+    <Button
+        android:id="@+id/btn_security_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_chief_security_dashboard"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_background"
+        android:text="Security's Dashboard"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</RelativeLayout>

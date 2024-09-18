@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    tools:context=".TeacherDashboardActivity">
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3B3B3B"
+            android:padding="16dp">
+
+            <!-- Menu Icon -->
+            <ImageButton
+                android:id="@+id/iv_menu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="Menu"
+                android:layout_alignParentStart="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/christlogo"
+                android:contentDescription="Logo"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <!-- Create an Invite Section -->
+        <RelativeLayout
+            android:id="@+id/RLInvite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#3B3B3B"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_create_invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create an invite"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_centerVertical="true" />
+
+            <ImageButton
+                android:id="@+id/btn_add_visitor"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_add"
+                android:contentDescription="Add Visitor"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <!-- Visitors Section -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewVisitors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#2E2E2E"/>
+
+        <!-- Upcoming Events Section -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewUpcomingEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#2E2E2E"/>
+    </LinearLayout>
+
+    <!-- Sidebar -->
+    <LinearLayout
+        android:id="@+id/sidebar"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#333333"
+        android:padding="16dp"
+        android:layout_gravity="start">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/christlogo"
+            android:contentDescription="Profile Image" />
+
+        <!-- Profile Name -->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Teacher"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Profile Role -->
+        <TextView
+            android:id="@+id/tv_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="User"
+            android:textColor="#B8B8B8"
+            android:textSize="14sp" />
+
+        <!-- Profile Contact -->
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="0987654321"
+            android:textColor="#B8B8B8"
+            android:textSize="14sp" />
+
+        <!-- Navigation Items -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Home"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btn_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Status"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btn_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Profile"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="Logout"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

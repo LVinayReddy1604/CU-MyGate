@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    android:padding="16dp">
+
+    <!-- CardView to contain profile details -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="#3B3B3B"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="356dp">
+
+            <!-- Profile heading -->
+            <TextView
+                android:id="@+id/tv_profile_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="PROFILE"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Profile Image -->
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="119dp"
+                android:layout_height="110dp"
+                android:layout_below="@id/tv_profile_heading"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:contentDescription="Profile Image"
+                android:src="@drawable/christlogo" />
+
+            <!-- Teacher Name -->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_profile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Teacher Name"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Position -->
+            <TextView
+                android:id="@+id/tv_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Position"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- Department -->
+            <TextView
+                android:id="@+id/tv_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_position"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Department"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- College Name -->
+            <TextView
+                android:id="@+id/tv_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_department"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="College Name"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_college"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Email"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_email"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@id/tv_college"-->
+            <!--                android:layout_alignParentStart="true"-->
+            <!--                android:layout_alignParentEnd="true"-->
+            <!--                android:layout_marginStart="143dp"-->
+            <!--                android:layout_marginTop="9dp"-->
+            <!--                android:layout_marginEnd="148dp"-->
+            <!--                android:text="Email"-->
+            <!--                android:textColor="#B8B8B8"-->
+            <!--                android:textSize="14sp" />-->
+
+            <!-- Contact Number -->
+
+            <!-- Email -->
+
+            <!-- Other profile details as needed -->
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

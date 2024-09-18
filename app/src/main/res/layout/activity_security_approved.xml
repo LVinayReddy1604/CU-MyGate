@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2B2B"
+    tools:context=".SecurityApprovedActivity">
+
+    <EditText
+        android:id="@+id/etDate"
+        android:textAlignment="center"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:layout_weight="1"
+        android:backgroundTint="#FFFFFF"
+        android:focusable="false"
+        android:hint="DD/MM/YYYY"
+        android:inputType="none"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewVisitors"
+        android:layout_width="417dp"
+        android:layout_height="690dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDate"
+        tools:listitem="@layout/item_visitor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

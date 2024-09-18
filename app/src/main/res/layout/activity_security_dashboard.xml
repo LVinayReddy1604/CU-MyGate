@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1E1E"
+    tools:context=".SecurityDashboardActivity">
+
+    <!-- Logo at the top right corner -->
+
+    <!-- Back button at the top left corner -->
+
+    <!-- Greeting text -->
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:src="@drawable/christlogo" />
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="19dp"
+        android:contentDescription="Back"
+        android:src="@drawable/ic_logout"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tvGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello, Guard!"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/ivLogo"
+        android:layout_alignParentStart="true" />
+
+    <!-- Start Scanning button -->
+    <Button
+        android:id="@+id/btnStartScanning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Scanning"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/tvGreeting" />
+
+    <!-- Add Visitor button -->
+    <Button
+        android:id="@+id/btnAddVisitor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Visitor"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/btnStartScanning" />
+
+    <!-- View Approved Visitors button -->
+    <Button
+        android:id="@+id/btnViewApprovedVisitors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Approved Visitors"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="#FFFFFF"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/btnAddVisitor" />
+
+    <!-- TextView for displaying scanned result -->
+    <TextView
+        android:id="@+id/tvScannedResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/btnViewApprovedVisitors" />
+
+    <!-- Green Channel section -->
+    <RelativeLayout
+        android:id="@+id/greenChannelSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333333"
+        android:padding="16dp"
+        android:layout_below="@id/tvScannedResult"
+        android:visibility="gone"
+        android:layout_marginTop="32dp">
+
+        <ImageView
+            android:id="@+id/ivGreenChannelIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/baseline_subway_24"
+            android:layout_alignParentEnd="true"
+            app:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/tvGreenChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green Channel"
+            android:textColor="#FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/ivGreenChannelIcon"
+            android:layout_marginStart="16dp"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- RecyclerView for displaying approved visitors -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewApprovedVisitors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/greenChannelSection"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+</RelativeLayout>

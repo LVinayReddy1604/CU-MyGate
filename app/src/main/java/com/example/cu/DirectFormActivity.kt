@@ -35,14 +35,12 @@ class DirectFormActivity : AppCompatActivity() {
     private lateinit var etTime: EditText
     private lateinit var spinnerEnteredThrough: Spinner
     private lateinit var etPhone: EditText
-    private lateinit var etEmail: EditText
     private lateinit var etAssist: EditText
     private lateinit var btnSelectImage: Button
     private lateinit var ivSelectedImage: ImageView
     private var imageUri: Uri? = null
     private lateinit var id: String
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var imagePickerLauncher: ActivityResultLauncher<String>
     private lateinit var progressDialog: ProgressDialog
     private lateinit var currentPhotoPath: String
     companion object {
@@ -61,7 +59,6 @@ class DirectFormActivity : AppCompatActivity() {
         etTime = findViewById(R.id.etTime)
         spinnerEnteredThrough = findViewById(R.id.spinnerEnteredThrough)
         etPhone = findViewById(R.id.etPhone)
-        etEmail = findViewById(R.id.etEmail)
         etAssist = findViewById(R.id.etAssist)
         btnSelectImage = findViewById(R.id.btnSelectImage)
         ivSelectedImage = findViewById(R.id.ivSelectedImage)
@@ -75,7 +72,7 @@ class DirectFormActivity : AppCompatActivity() {
         etPhone.filters = arrayOf(InputFilter.LengthFilter(10),PhoneNumberInputFilter())
         etAssist.filters = arrayOf(InputFilter.LengthFilter(4),AssistInputFilter())
 
-        val options = listOf("1", "2", "3", "4", "5")
+        val options = listOf("2", "3", "4")
         val adapter = ArrayAdapter(this, R.layout.spinner_item, options)
         spinnerEnteredThrough.adapter = adapter
 
@@ -160,26 +157,16 @@ class DirectFormActivity : AppCompatActivity() {
         // Gather form data
         val name = etName.text.toString()
         val purpose = etPurpose.text.toString()
+        val vehicle = spinnerEnteredThrough.selectedItem.toString()
+        val number = findViewById<EditText>(R.id.etReceivedBy).text.toString()
         val date = etDate.text.toString()
         val time = etTime.text.toString()
-        val enteredThrough = spinnerEnteredThrough.selectedItem.toString()
         val phone = etPhone.text.toString()
-        val email = etEmail.text.toString()
         val assisted = etAssist.text.toString()
 
         // Validate fields
-        if (name.isEmpty() || purpose.isEmpty() || date.isEmpty() || time.isEmpty() || phone.isEmpty() || email.isEmpty() || imageUri == null) {
+        if (name.isEmpty() || purpose.isEmpty() || date.isEmpty() || time.isEmpty() || imageUri == null) {
             Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!isValidEmail(email)) {
-            Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!isValidPhoneNumber(phone)) {
-            Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -188,26 +175,21 @@ class DirectFormActivity : AppCompatActivity() {
         progressDialog.setMessage("Processing...")
         progressDialog.show()
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Visitors")
+        databaseReference = FirebaseDatabase.getInstance().getReference("VisitorsUninvited")
         id = databaseReference.push().key!!
 
         val uploaderID = intent.getStringExtra("id")
-        val approved = "true"
-        val department = "Un-Invited"
-        val visitor = visitorDetails(
+        val visitor = uninvitedDetails(
             id,
             uploaderID,
-            approved,
-            department,
             name,
             purpose,
+            vehicle,
+            number,
             date,
             time,
-            enteredThrough,
             phone,
-            email,
-            assisted,
-            status ="Visited"
+            assisted
         )
         databaseReference.child(id).setValue(visitor).addOnCompleteListener {
             uploadImage()
@@ -219,10 +201,6 @@ class DirectFormActivity : AppCompatActivity() {
             Toast.makeText(this, "Error: ${err.message}", Toast.LENGTH_SHORT).show()
             progressDialog.dismiss()
         }
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun isValidPhoneNumber(phone: String): Boolean {
@@ -264,13 +242,21 @@ class DirectFormActivity : AppCompatActivity() {
 
     private class AssistInputFilter : InputFilter {
         override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
-            val input = (dest.toString() + source.toString()).trim()
-            // Allow only digits, ensure the total length is <= 10, and ensure the first digit is 9, 8, 7, or 6
-            return if (input.matches(Regex("^[1-9]\\d{1,9}$"))) {
-                null
+            // Combine the current input with the new input
+            val input = dest.subSequence(0, dstart).toString() + source.subSequence(start, end) + dest.subSequence(dend, dest.length)
+
+            // Check if the input length exceeds 10 digits
+            if (input.length > 3) {
+                return ""
+            }
+
+            // Ensure the input contains only digits
+            return if (input.matches(Regex("\\d*"))) {
+                null  // Accept input if it's valid
             } else {
-                ""
+                ""    // Reject input if it contains non-digit characters
             }
         }
     }
+
 }

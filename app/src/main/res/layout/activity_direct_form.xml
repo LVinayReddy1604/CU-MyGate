@@ -34,7 +34,7 @@
                 android:id="@+id/tvGuestNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guest Name"
+                android:text="Guest Name *"
                 android:layout_marginBottom="5dp"
                 android:textColor="#FFFFFF" />
 
@@ -58,7 +58,7 @@
                 android:id="@+id/tvPurposeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Purpose of Meeting:"
+                android:text="Purpose of Meeting*"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
@@ -78,42 +78,60 @@
                 android:backgroundTint="#FFFFFF" />
 
             <!-- Guest Status -->
+<!--            <TextView-->
+<!--                android:textSize="16sp"-->
+<!--                android:id="@+id/tvGuestStatusLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Guest Status"-->
+<!--                android:layout_marginBottom="15sp"-->
+<!--                android:textColor="#FFFFFF" />-->
+
+<!--            <RadioGroup-->
+<!--                android:id="@+id/rgGuestStatus"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="15sp"-->
+<!--                android:paddingLeft="15dp"-->
+<!--                android:paddingRight="15dp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/rbStandard"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Standard"-->
+<!--                    android:textColor="#FFFFFF"-->
+<!--                    android:buttonTint="#FFFFFF"-->
+<!--                    android:layout_marginRight="20dp"/>-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/rbHonored"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Honored"-->
+<!--                    android:textColor="#FFFFFF"-->
+<!--                    android:buttonTint="#FFFFFF"-->
+<!--                    android:layout_marginStart="16dp" />-->
+<!--            </RadioGroup>-->
+
             <TextView
                 android:textSize="16sp"
-                android:id="@+id/tvGuestStatusLabel"
+                android:id="@+id/tvEnteredThroughLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guest Status"
+                android:text="Vehicle type (select if required)"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
-            <RadioGroup
-                android:id="@+id/rgGuestStatus"
+            <Spinner
+                android:id="@+id/spinnerEnteredThrough"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginBottom="15sp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rbStandard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Standard"
-                    android:textColor="#FFFFFF"
-                    android:buttonTint="#FFFFFF"
-                    android:layout_marginRight="20dp"/>
-
-                <RadioButton
-                    android:id="@+id/rbHonored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Honored"
-                    android:textColor="#FFFFFF"
-                    android:buttonTint="#FFFFFF"
-                    android:layout_marginStart="16dp" />
-            </RadioGroup>
+                android:backgroundTint="#FFFFFF" />
 
             <!-- Received by -->
             <TextView
@@ -121,7 +139,7 @@
                 android:id="@+id/tvReceivedByLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Received by"
+                android:text="Vehicle number(if required)"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
@@ -130,7 +148,7 @@
                 android:id="@+id/etReceivedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Student Co-ordinator"
+                android:hint="KA 51 AB 1234"
                 android:inputType="text"
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
@@ -196,7 +214,7 @@
                 android:id="@+id/tvPhoneLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Visitor/Teacher Phone"
+                android:text="Visitor Phone"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
@@ -216,30 +234,30 @@
 
             <!-- Email -->
 
-            <TextView
-                android:textSize="16sp"
-                android:id="@+id/tvEmailLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Visitor/Teacher Email"
-                android:layout_marginBottom="15sp"
-                android:textColor="#FFFFFF" />
+<!--            <TextView-->
+<!--                android:textSize="16sp"-->
+<!--                android:id="@+id/tvEmailLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Visitor/Teacher Email"-->
+<!--                android:layout_marginBottom="15sp"-->
+<!--                android:textColor="#FFFFFF" />-->
 
-            <EditText
-                android:background="@drawable/edit_text_drawable"
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter email"
-                android:inputType="textEmailAddress"
-                android:layout_marginBottom="15sp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColorHint="#AAAAAA"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:importantForAutofill="yes"
-                android:autofillHints="emailAddress" />
+<!--            <EditText-->
+<!--                android:background="@drawable/edit_text_drawable"-->
+<!--                android:id="@+id/etEmail"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Enter email"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:layout_marginBottom="15sp"-->
+<!--                android:paddingLeft="15dp"-->
+<!--                android:paddingRight="15dp"-->
+<!--                android:textColorHint="#AAAAAA"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:backgroundTint="#FFFFFF"-->
+<!--                android:importantForAutofill="yes"-->
+<!--                android:autofillHints="emailAddress" />-->
 
             <!--            Assisted By-->
             <TextView
@@ -247,7 +265,7 @@
                 android:id="@+id/tvAssistLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Visitor Assisted by"
+                android:text="Visitor Assisted by*"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
@@ -258,7 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="Number of Visitors"
+                android:hint="Number of Visitors (0 if none)"
                 android:layout_marginBottom="15sp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -266,23 +284,6 @@
                 android:textColor="#FFFFFF"
                 android:textColorHint="#AAAAAA" />
 
-            <TextView
-                android:textSize="16sp"
-                android:id="@+id/tvEnteredThroughLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Entering Through Gate"
-                android:layout_marginBottom="15sp"
-                android:textColor="#FFFFFF" />
-
-            <Spinner
-                android:id="@+id/spinnerEnteredThrough"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="15sp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:backgroundTint="#FFFFFF" />
 
             <!--             City -->
             <!--            <TextView
@@ -330,7 +331,7 @@
                 android:id="@+id/tvImageLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Visitor Image"
+                android:text="Visitor Image*"
                 android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 

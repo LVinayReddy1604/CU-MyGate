@@ -116,6 +116,16 @@
                     android:padding="16dp"
                     android:layout_marginBottom="8dp"/>
 
+                <Button
+                    android:id="@+id/btn_uninvited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:text="Uninvited"
+                    android:textColor="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginBottom="8dp"/>
+
                 <!-- Logout Button -->
                 <ImageButton
                     android:id="@+id/btn_logout"

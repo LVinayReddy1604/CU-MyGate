@@ -26,17 +26,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            android:background="#2E2E2E">
+            android:background="@drawable/layout_radius">
 
             <!-- Guest Name -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvGuestNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Guest Name"
+                android:layout_marginBottom="5dp"
                 android:textColor="#FFFFFF" />
 
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,39 +47,53 @@
                 android:inputType="text"
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:backgroundTint="#FFFFFF" />
 
             <!-- Purpose of Meeting -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvPurposeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Purpose of Meeting:"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etPurpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="e.g Food/Agency"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#FFFFFF" />
 
             <!-- Guest Status -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvGuestStatusLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Guest Status"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <RadioGroup
                 android:id="@+id/rgGuestStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -85,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:text="Standard"
                     android:textColor="#FFFFFF"
-                    android:buttonTint="#FFFFFF" />
+                    android:buttonTint="#FFFFFF"
+                    android:layout_marginRight="20dp"/>
 
                 <RadioButton
                     android:id="@+id/rbHonored"
@@ -99,13 +117,16 @@
 
             <!-- Received by -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvReceivedByLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Received by"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etReceivedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,23 +135,31 @@
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#FFFFFF"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:importantForAutofill="no"
                 android:autofillHints="name" />
 
             <!-- Select Date and Time -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvDateTimeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Date and Time"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
+
                 android:orientation="horizontal">
 
                 <EditText
+                android:background="@drawable/edit_text_drawable"
                     android:id="@+id/etDate"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -140,9 +169,12 @@
                     android:textColorHint="#AAAAAA"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                     android:focusable="false" />
 
                 <EditText
+                android:background="@drawable/edit_text_drawable"
                     android:id="@+id/etTime"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -153,18 +185,23 @@
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#FFFFFF"
                     android:focusable="false"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                     android:layout_marginStart="8dp" />
             </LinearLayout>
 
             <!-- Phone -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvPhoneLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Visitor/Teacher Phone"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,23 +209,32 @@
                 android:inputType="phone"
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:backgroundTint="#FFFFFF" />
 
             <!-- Email -->
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvEmailLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Visitor/Teacher Email"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter email"
                 android:inputType="textEmailAddress"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:textColorHint="#AAAAAA"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#FFFFFF"
@@ -197,45 +243,58 @@
 
 <!--            Assisted By-->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvAssistLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Visitor Assisted by"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <!-- Entered Through -->
             <EditText
+                android:background="@drawable/edit_text_drawable"
                 android:id="@+id/etAssist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:hint="Number of Visitors"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#AAAAAA" />
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvEnteredThroughLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Entering Through Gate"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <Spinner
                 android:id="@+id/spinnerEnteredThrough"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:backgroundTint="#FFFFFF" />
 
 <!--             City -->
-<!--            <TextView-->
+<!--            <TextView
+                android:textSize="16sp"-->
 <!--                android:id="@+id/tvCityLabel"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="City"-->
 <!--                android:textColor="#FFFFFF" />-->
 
-<!--            <EditText-->
+<!--            <EditText
+                android:background="@drawable/edit_text_drawable"-->
 <!--                android:id="@+id/etCity"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
@@ -246,14 +305,16 @@
 <!--                android:backgroundTint="#FFFFFF" />-->
 
 <!--             Country -->
-<!--            <TextView-->
+<!--            <TextView
+                android:textSize="16sp"-->
 <!--                android:id="@+id/tvCountryLabel"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="Country"-->
 <!--                android:textColor="#FFFFFF" />-->
 
-<!--            <EditText-->
+<!--            <EditText
+                android:background="@drawable/edit_text_drawable"-->
 <!--                android:id="@+id/etCountry"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
@@ -265,10 +326,12 @@
 
             <!-- Add Visitor Image -->
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/tvImageLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Visitor Image"
+                android:layout_marginBottom="15sp"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -278,6 +341,9 @@
                 android:text="Select Image"
                 android:backgroundTint="#3F51B5"
                 android:textColor="#FFFFFF"
+                android:layout_marginBottom="15sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_marginTop="8dp" />
 
             <ImageView
@@ -298,7 +364,9 @@
                 android:backgroundTint="#3F51B5"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="16dp"
-                android:layout_below="@id/ivSelectedImage" />
+                android:layout_below="@id/ivSelectedImage"
+                android:layout_marginBottom="64sp"
+                />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

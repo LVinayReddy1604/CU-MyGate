@@ -17,10 +17,12 @@ data class visitorDetails(
     val email: String? = null,
     val assisted: String? = null,
     val details: String? = null,
+    val honoured: String? = null,
     val status: String = ""
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),

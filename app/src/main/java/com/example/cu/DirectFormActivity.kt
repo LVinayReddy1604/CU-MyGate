@@ -2,10 +2,8 @@
 
 package com.example.cu
 
-import android.app.DatePickerDialog
 import android.app.Activity
 import android.app.ProgressDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,12 +12,10 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.text.InputFilter
 import android.text.Spanned
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.firebase.database.DatabaseReference
@@ -211,7 +207,7 @@ class DirectFormActivity : AppCompatActivity() {
             phone,
             email,
             assisted,
-            status="Visited"
+            status ="Visited"
         )
         databaseReference.child(id).setValue(visitor).addOnCompleteListener {
             uploadImage()

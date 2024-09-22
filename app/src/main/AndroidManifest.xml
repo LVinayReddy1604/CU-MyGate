@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.cu" >
+    package="com.example.cu">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -23,7 +23,13 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".UninvitedVisitorAdaptor"
+            android:exported="false" />
+        <activity
+            android:name=".ChiefSecurityUninvitedDashboard"
+            android:exported="false" />
         <activity
             android:name=".Security_Scanned_QR"
             android:exported="false" />
@@ -68,7 +74,7 @@
             android:exported="false" /> <!-- Splash Activity -->
         <activity
             android:name=".SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -86,7 +92,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />

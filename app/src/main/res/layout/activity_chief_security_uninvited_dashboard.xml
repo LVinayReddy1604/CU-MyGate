@@ -45,7 +45,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
-            android:textSize="26dp"
+            android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

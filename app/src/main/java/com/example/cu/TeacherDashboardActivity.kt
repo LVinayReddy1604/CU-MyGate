@@ -263,6 +263,8 @@ class TeacherDashboardActivity : AppCompatActivity() {
                         visitor?.let { visitors.add(it) }
                     }
                 }
+
+                visitors.reverse()
                 // Sort visitors by date and time in descending order
                 // visitors.sortWith(compareByDescending<visitorDetails> { parseDate(it.date.toString()) }
                 //     .thenByDescending { parseTime(it.time.toString()) })

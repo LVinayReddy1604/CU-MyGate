@@ -35,6 +35,7 @@ class ApprovedVisitorsActivity : AppCompatActivity() {
     private lateinit var btnApproved: Button
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
+    private lateinit var btnuninvited: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,8 @@ class ApprovedVisitorsActivity : AppCompatActivity() {
         btnMenu = findViewById(R.id.iv_menu)
         btnHome = findViewById(R.id.btn_home)
         btnApproved = findViewById(R.id.btn_approved)
+        btnuninvited = findViewById(R.id.btn_uninvited)
+
 
         // Set up RecyclerView for departments in a grid layout
         val recyclerViewDepartments = findViewById<RecyclerView>(R.id.recyclerViewDepartments)
@@ -61,6 +64,12 @@ class ApprovedVisitorsActivity : AppCompatActivity() {
 
         // Fetch data for departments
         fetchDepartmentsFromDatabase()
+
+        btnuninvited.setOnClickListener {
+            val intent = Intent(this, ChiefSecurityUninvitedDashboard::class.java)
+            startActivity(intent)
+            drawerLayout.close()
+        }
 
         btnApproved.setOnClickListener {
             // Navigate to Approved Activity

@@ -1,7 +1,9 @@
 package com.example.cu
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,7 @@ import com.google.firebase.storage.StorageReference
 import android.graphics.Bitmap
 import android.util.Base64
 import android.widget.ImageButton
+import androidx.core.app.ActivityCompat.recreate
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
@@ -82,7 +85,7 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
         }.addOnFailureListener {
             holder.progressBar.visibility = View.GONE
             holder.visitorImageView.visibility = View.VISIBLE
-            Toast.makeText(context, "Failed to fetch images of visitors", Toast.LENGTH_SHORT).show()
+            holder.visitorImageView.setImageResource(R.drawable.default_image)
         }
 
         holder.nameTextView.text = visitor.name
@@ -136,6 +139,9 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
                     .addOnSuccessListener {
                         Toast.makeText(context, "Visitor Approved", Toast.LENGTH_SHORT).show()
                         sendEmailWithQRCode(visitor) // Trigger email with QR code
+                        if (context is Activity) {
+                            context.recreate()  // Cast context to Activity and call recreate
+                        }
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, "Approval Failed", Toast.LENGTH_SHORT).show()
@@ -151,7 +157,9 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
                 visitorRef.child("approved").setValue("false")
                     .addOnSuccessListener {
                         Toast.makeText(context, "Visitor Approved", Toast.LENGTH_SHORT).show()
-                        sendEmailWithQRCode(visitor) // Trigger email with QR code
+                        if (context is Activity) {
+                            context.recreate()  // Cast context to Activity and call recreate
+                        }
                     }
                     .addOnFailureListener {
                         Toast.makeText(context, "Approval Failed", Toast.LENGTH_SHORT).show()
@@ -178,11 +186,13 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
                     visitorRef.removeValue().addOnSuccessListener {
                         // Successfully deleted visitor details
                         Toast.makeText(context, "Visitor Deleted", Toast.LENGTH_SHORT).show()
-
                         // Delete visitor image from Firebase Storage
                         imageRef.delete().addOnSuccessListener {
                             // Successfully deleted image
                             Toast.makeText(context, "Visitor Image Deleted", Toast.LENGTH_SHORT).show()
+                            if (context is Activity) {
+                                context.recreate()  // Cast context to Activity and call recreate
+                            }
                         }.addOnFailureListener {
                             // Failed to delete image
                             Toast.makeText(context, "Failed to delete visitor image", Toast.LENGTH_SHORT).show()
@@ -196,7 +206,6 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
                 builder.show()
             }
         }
-
     }
 
     override fun getItemCount(): Int {

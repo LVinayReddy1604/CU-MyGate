@@ -5,6 +5,7 @@ package com.example.cu
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
@@ -170,7 +171,7 @@ class FormActivity : AppCompatActivity() {
         val assisted = etAssist.text.toString()
 
         // Validate fields
-        if (name.isEmpty() || purpose.isEmpty() || date.isEmpty() || time.isEmpty() || phone.isEmpty() || email.isEmpty() || imageUri == null) {
+        if (name.isEmpty() || purpose.isEmpty() || date.isEmpty() || time.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT)
                 .show()
             return
@@ -178,11 +179,6 @@ class FormActivity : AppCompatActivity() {
 
         if (!isValidEmail(email)) {
             Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!isValidPhoneNumber(phone)) {
-            Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -209,7 +205,25 @@ class FormActivity : AppCompatActivity() {
         )
         databaseReference.child(id).setValue(visitor).addOnCompleteListener {
             Toast.makeText(this, "Data added Successfully", Toast.LENGTH_SHORT).show()
-            uploadImage()
+            val progressDialog = ProgressDialog(this)
+            progressDialog.setTitle("Uploading Image...")
+            progressDialog.setMessage("Processing...")
+            progressDialog.show()
+
+            val ref: StorageReference =
+                FirebaseStorage.getInstance().getReference().child("Visitors").child("$id")
+            imageUri?.let {
+                ref.putFile(it).addOnSuccessListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(this, "Image Uploaded successfully", Toast.LENGTH_SHORT).show()
+                    finish()
+                }.addOnFailureListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(this, "Upload unsuccessful", Toast.LENGTH_SHORT).show()
+                }
+            }
+            progressDialog.cancel()
+            onBackPressed()
         }.addOnFailureListener { err ->
             Toast.makeText(this, "Error: ${err.message}", Toast.LENGTH_SHORT).show()
         }
@@ -227,23 +241,7 @@ class FormActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Uploading Image...")
-        progressDialog.setMessage("Processing...")
-        progressDialog.show()
 
-        val ref: StorageReference =
-            FirebaseStorage.getInstance().getReference().child("Visitors").child("$id")
-        imageUri?.let {
-            ref.putFile(it).addOnSuccessListener {
-                progressDialog.dismiss()
-                Toast.makeText(this, "Image Uploaded successfully", Toast.LENGTH_SHORT).show()
-                finish()
-            }.addOnFailureListener {
-                progressDialog.dismiss()
-                Toast.makeText(this, "Upload unsuccessful", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     private class PhoneNumberInputFilter : InputFilter {

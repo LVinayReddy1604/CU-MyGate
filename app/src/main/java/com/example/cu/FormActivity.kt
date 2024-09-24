@@ -53,7 +53,7 @@ class FormActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         btnSelectImage = findViewById(R.id.btnSelectImage)
         ivSelectedImage = findViewById(R.id.ivSelectedImage)
-        etAssist=findViewById(R.id.etAssist)
+        etAssist = findViewById(R.id.etAssist)
 
         // Initialize progress dialog
         progressDialog = ProgressDialog(this)
@@ -62,24 +62,26 @@ class FormActivity : AppCompatActivity() {
 
         // Apply input filter for phone number
         etPhone.filters = arrayOf(InputFilter.LengthFilter(10), PhoneNumberInputFilter())
-        etAssist.filters = arrayOf(InputFilter.LengthFilter(4), AssistInputFilter()
+        etAssist.filters = arrayOf(
+            InputFilter.LengthFilter(4), AssistInputFilter()
         )
         val options = listOf("1", "2", "3", "4", "5")
         val adapter = ArrayAdapter(this, R.layout.spinner_item, options)
         spinnerEnteredThrough.adapter = adapter
 
         // Initialize ActivityResultLauncher for image picking
-        imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                imageUri = it
-                ivSelectedImage.setImageURI(it)
-                ivSelectedImage.visibility= View.VISIBLE
-                progressDialog.dismiss()  // Dismiss the progress dialog when image is loaded
-            } ?: run {
-                progressDialog.dismiss()  // Dismiss the progress dialog if no image is selected
-                Toast.makeText(this, "Image selection cancelled", Toast.LENGTH_SHORT).show()
+        imagePickerLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                uri?.let {
+                    imageUri = it
+                    ivSelectedImage.setImageURI(it)
+                    ivSelectedImage.visibility = View.VISIBLE
+                    progressDialog.dismiss()  // Dismiss the progress dialog when image is loaded
+                } ?: run {
+                    progressDialog.dismiss()  // Dismiss the progress dialog if no image is selected
+                    Toast.makeText(this, "Image selection cancelled", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
 
         // Set up image picker
         btnSelectImage.setOnClickListener {
@@ -107,11 +109,19 @@ class FormActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(this, R.style.DialogTheme, { _, selectedYear, selectedMonth, selectedDay ->
-            val formattedDay = if (selectedDay < 10) "0$selectedDay" else "$selectedDay"
-            val formattedMonth = if (selectedMonth + 1 < 10) "0${selectedMonth + 1}" else "${selectedMonth + 1}"
-            etDate.setText("$formattedDay/$formattedMonth/$selectedYear")
-        }, year, month, day)
+        val datePickerDialog = DatePickerDialog(
+            this,
+            R.style.DialogTheme,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val formattedDay = if (selectedDay < 10) "0$selectedDay" else "$selectedDay"
+                val formattedMonth =
+                    if (selectedMonth + 1 < 10) "0${selectedMonth + 1}" else "${selectedMonth + 1}"
+                etDate.setText("$formattedDay/$formattedMonth/$selectedYear")
+            },
+            year,
+            month,
+            day
+        )
         datePickerDialog.datePicker.minDate = calendar.timeInMillis
 
         datePickerDialog.show()
@@ -122,13 +132,28 @@ class FormActivity : AppCompatActivity() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
-        val timePickerDialog = TimePickerDialog(this, R.style.DialogTheme, { _, selectedHour, selectedMinute ->
-            val amPm = if (selectedHour < 12) "AM" else "PM"
-            val hourIn12Format = if (selectedHour % 12 == 0) 12 else selectedHour % 12
-            val formattedHour = if (hourIn12Format < 10) "0$hourIn12Format" else "$hourIn12Format"
-            val formattedMinute = if (selectedMinute < 10) "0$selectedMinute" else "$selectedMinute"
-            etTime.setText("$formattedHour:$formattedMinute $amPm")
-        }, hour, minute, false)
+        val timePickerDialog =
+            TimePickerDialog(this, R.style.DialogTheme, { _, selectedHour, selectedMinute ->
+                var adjustedHour = selectedHour
+                var adjustedMinute = selectedMinute
+
+                // Adjust time if it's outside the range 6 AM to 6 PM
+                if (selectedHour < 6) {
+                    adjustedHour = 6
+                    adjustedMinute = 0
+                } else if (selectedHour >= 18) {
+                    adjustedHour = 17
+                    adjustedMinute = 59
+                }
+
+                val amPm = if (adjustedHour < 12) "AM" else "PM"
+                val hourIn12Format = if (adjustedHour % 12 == 0) 12 else adjustedHour % 12
+                val formattedHour =
+                    if (hourIn12Format < 10) "0$hourIn12Format" else "$hourIn12Format"
+                val formattedMinute =
+                    if (adjustedMinute < 10) "0$adjustedMinute" else "$adjustedMinute"
+                etTime.setText("$formattedHour:$formattedMinute $amPm")
+            }, hour, minute, false)
 
         timePickerDialog.show()
     }
@@ -142,11 +167,12 @@ class FormActivity : AppCompatActivity() {
         val enteredThrough = spinnerEnteredThrough.selectedItem.toString()
         val phone = etPhone.text.toString()
         val email = etEmail.text.toString()
-        val assisted=etAssist.text.toString()
+        val assisted = etAssist.text.toString()
 
         // Validate fields
         if (name.isEmpty() || purpose.isEmpty() || date.isEmpty() || time.isEmpty() || phone.isEmpty() || email.isEmpty() || imageUri == null) {
-            Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
@@ -206,7 +232,8 @@ class FormActivity : AppCompatActivity() {
         progressDialog.setMessage("Processing...")
         progressDialog.show()
 
-        val ref: StorageReference = FirebaseStorage.getInstance().getReference().child("Visitors").child("$id")
+        val ref: StorageReference =
+            FirebaseStorage.getInstance().getReference().child("Visitors").child("$id")
         imageUri?.let {
             ref.putFile(it).addOnSuccessListener {
                 progressDialog.dismiss()
@@ -220,7 +247,14 @@ class FormActivity : AppCompatActivity() {
     }
 
     private class PhoneNumberInputFilter : InputFilter {
-        override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
+        override fun filter(
+            source: CharSequence,
+            start: Int,
+            end: Int,
+            dest: Spanned,
+            dstart: Int,
+            dend: Int
+        ): CharSequence? {
             val input = (dest.toString() + source.toString()).trim()
             // Allow only digits, ensure the total length is <= 10, and ensure the first digit is 9, 8, 7, or 6
             return if (input.matches(Regex("^[9876]\\d{0,9}$"))) {
@@ -232,13 +266,30 @@ class FormActivity : AppCompatActivity() {
     }
 
     private class AssistInputFilter : InputFilter {
-        override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
-            val input = (dest.toString() + source.toString()).trim()
-            // Allow only digits, ensure the total length is <= 10, and ensure the first digit is 9, 8, 7, or 6
-            return if (input.matches(Regex("^[1-9]\\d{1,9}$"))) {
-                null
+        override fun filter(
+            source: CharSequence,
+            start: Int,
+            end: Int,
+            dest: Spanned,
+            dstart: Int,
+            dend: Int
+        ): CharSequence? {
+            // Combine the current input with the new input
+            val input = dest.subSequence(0, dstart).toString() + source.subSequence(
+                start,
+                end
+            ) + dest.subSequence(dend, dest.length)
+
+            // Check if the input length exceeds 10 digits
+            if (input.length > 3) {
+                return ""
+            }
+
+            // Ensure the input contains only digits
+            return if (input.matches(Regex("\\d*"))) {
+                null  // Accept input if it's valid
             } else {
-                ""
+                ""    // Reject input if it contains non-digit characters
             }
         }
     }

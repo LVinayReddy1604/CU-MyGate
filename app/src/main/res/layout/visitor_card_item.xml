@@ -86,19 +86,21 @@
             android:layout_marginTop="16dp">
 
             <Button
-                android:id="@+id/btn_accept"
+                android:id="@+id/btn_approve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Accept"
+                android:text="Approve"
+                android:visibility="gone"
                 android:backgroundTint="@color/green"
                 android:textColor="@android:color/white"
                 android:layout_marginEnd="8dp"/>
 
             <Button
-                android:id="@+id/btn_reject"
+                android:id="@+id/btn_disapprove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reject"
+                android:text="Disapprove"
+                android:visibility="gone"
                 android:backgroundTint="@color/red"
                 android:textColor="@android:color/white"
                 android:layout_marginEnd="8dp"/>

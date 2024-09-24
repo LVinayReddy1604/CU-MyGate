@@ -64,8 +64,8 @@ class Chief_Dept_Approved : AppCompatActivity() {
                 }
 
                 // Set user type via the public method
-                visitorAdapter.setUserType("Chief",false)
                 visitorAdapter.notifyDataSetChanged()
+                visitorAdapter.setChiefDashboardType("Chief","approved")
             }
 
             override fun onCancelled(error: DatabaseError) {

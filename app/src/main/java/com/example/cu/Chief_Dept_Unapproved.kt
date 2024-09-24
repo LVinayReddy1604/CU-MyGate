@@ -67,8 +67,8 @@ class Chief_Dept_Unapproved : AppCompatActivity() {
                 //     .thenByDescending { parseTime(it.time.toString()) })
 
                 // Set user type via the public method
-                visitorAdapter.setUserType("Chief",false)
                 visitorAdapter.notifyDataSetChanged()
+                visitorAdapter.setChiefDashboardType("Chief","disapproved")
             }
 
             override fun onCancelled(error: DatabaseError) {

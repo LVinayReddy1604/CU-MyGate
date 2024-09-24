@@ -32,12 +32,19 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
     RecyclerView.Adapter<VisitorAdapter.ViewHolder>() {
 
     private var userType = "dummy"
-    private var userStatusCheck=false
+    private var userStatusCheck = false
+    private var approved=false
+    private var dashboard=""
 
     // Method to set the userType
     fun setUserType(type: String,status: Boolean) {
         userType = type
-        userStatusCheck=status
+        userStatusCheck = status
+    }
+
+    fun setChiefDashboardType(type: String, dashboardtype: String){
+        userType = type
+        dashboard = dashboardtype
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -47,8 +54,8 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
         val visitorImageView: ImageView = view.findViewById(R.id.iv_visitor_image)
         val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
         val approvedTextView: TextView = view.findViewById(R.id.tv_approved)
-        val btnAccept: Button = view.findViewById(R.id.btn_accept)
-        val btnReject: Button = view.findViewById(R.id.btn_reject)
+        val btnApprove: Button = view.findViewById(R.id.btn_approve)
+        val btnDisapprove: Button = view.findViewById(R.id.btn_disapprove)
         val btnDelete: ImageButton = view.findViewById(R.id.btn_delete)
 
     }
@@ -85,148 +92,112 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
         when (visitor.approved) {
             "true" -> {
                 holder.approvedTextView.text = "Approved"
-                holder.btnAccept.text = "Disapprove"
-                holder.btnAccept.setTextColor(ContextCompat.getColor(context, R.color.black))
-                holder.btnAccept.backgroundTintList = ContextCompat.getColorStateList(context, R.color.red)
-                holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.green))
+                holder.btnApprove.visibility=View.GONE
+                holder.btnDisapprove.visibility=View.VISIBLE
             }
             "false" -> {
                 holder.approvedTextView.text = "Pending"
-                holder.btnAccept.text = "Approve"
-                holder.btnAccept.backgroundTintList = ContextCompat.getColorStateList(context, R.color.green)
-                holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
-            }
-            else -> {
-                holder.approvedTextView.text = "Rejected"
-                holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.yellow))
+                holder.btnApprove.visibility = View.VISIBLE
+                holder.btnDisapprove.visibility=View.GONE
             }
         }
 
         // Show/hide buttons based on userType
         if ((userType == "Teacher") || ((userType == "Guard") && (userStatusCheck == false))) {
-            holder.btnAccept.visibility = View.GONE
-            holder.btnReject.visibility = View.GONE
+            holder.btnApprove.visibility = View.GONE
+            holder.btnDisapprove.visibility = View.GONE
+        }
+
+        if (visitor.approved == "true") {
+            holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.green))
         } else {
-            holder.btnAccept.visibility = View.VISIBLE
-            holder.btnReject.visibility = View.VISIBLE
+            holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
 
-        // Set up accept button
-        holder.btnAccept.setOnClickListener {
-            if (holder.btnAccept.text == "Approve") {
-                val visitorId = visitor.id
-                if (visitorId != null) {
-                    val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
-                    visitorRef.child("approved").setValue("true")
-                        .addOnSuccessListener {
-                            Toast.makeText(context, "Visitor Approved", Toast.LENGTH_SHORT).show()
-                            sendEmailWithQRCode(visitor) // Trigger email with QR code
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(context, "Approval Failed", Toast.LENGTH_SHORT).show()
-                        }
-                }
-            } else {
+        //delete button visibility logic
+        if (userType=="Teacher" && visitor.approved=="false" && userStatusCheck==true) {
+            holder.btnDelete.visibility = View.VISIBLE
+        }
 
+        if (userType == "chief" && dashboard == "approved"){
+            holder.btnDisapprove.visibility=View.VISIBLE
+        }
+
+        if (userType == "chief" && dashboard == "disapproved"){
+            holder.btnApprove.visibility=View.VISIBLE
+        }
+
+        // Set up Approve button
+        holder.btnApprove.setOnClickListener {
+            val visitorId = visitor.id
+            if (visitorId != null) {
+                val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
+                visitorRef.child("approved").setValue("true")
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Visitor Approved", Toast.LENGTH_SHORT).show()
+                        sendEmailWithQRCode(visitor) // Trigger email with QR code
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, "Approval Failed", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
+
+        // Set up Disapprove button
+        holder.btnDisapprove.setOnClickListener {
+            val visitorId = visitor.id
+            if (visitorId != null) {
+                val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
+                visitorRef.child("approved").setValue("false")
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Visitor Approved", Toast.LENGTH_SHORT).show()
+                        sendEmailWithQRCode(visitor) // Trigger email with QR code
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, "Approval Failed", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        }
+
+        // Set up Delete button
+        holder.btnDelete.setOnClickListener {
+            val visitorId = visitor.id
+            if (visitorId != null) {
+                // Reference to the visitor details in the Realtime Database
+                val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
+
+                // Reference to the visitor image in Firebase Storage
+                val imageRef = FirebaseStorage.getInstance().getReference("Visitors").child(visitorId)
+
+                // Show confirmation dialog
                 val builder = AlertDialog.Builder(context)
-                builder.setTitle("Reject Visitor")
-                builder.setMessage("Are you sure you want to reject this visitor?")
+                builder.setTitle("Delete Visitor")
+                builder.setMessage("Are you sure you want to delete this visitor?")
                 builder.setPositiveButton("Yes") { _, _ ->
-                    val visitorId = visitor.id
-                    if (visitorId != null) {
-                        val visitorRef =
-                            FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
-                        visitorRef.child("approved").setValue("false")
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    context,
-                                    "Visitor's Approval Changed",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            .addOnFailureListener {
-                                Toast.makeText(
-                                    context,
-                                    "Failed to change approval state",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                    }
-                }
-            }
-        }
+                    // Delete visitor details from Realtime Database
+                    visitorRef.removeValue().addOnSuccessListener {
+                        // Successfully deleted visitor details
+                        Toast.makeText(context, "Visitor Deleted", Toast.LENGTH_SHORT).show()
 
-        holder.btnReject.visibility = View.GONE
-        holder.btnReject.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("Reject Visitor")
-            builder.setMessage("Are you sure you want to reject this visitor?")
-            builder.setPositiveButton("Yes") { _, _ ->
-                val visitorId = visitor.id
-                if (visitorId != null) {
-                    val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
-                    visitorRef.child("approved").setValue("false")
-                        .addOnSuccessListener {
-                            Toast.makeText(context, "Visitor Rejected", Toast.LENGTH_SHORT).show()
-                            holder.approvedTextView.text = "Rejected"
-                            holder.approvedTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(context, "Rejection Failed", Toast.LENGTH_SHORT).show()
-                        }
-                }
-            }
-            builder.setNegativeButton("No", null)
-            builder.show()
-        }
-
-        if (userType=="Teacher" && visitor.approved=="false" && userStatusCheck==true){
-            holder.btnDelete.visibility=View.VISIBLE
-            holder.btnDelete.setOnClickListener {
-                //delete the visitor details with the visitor id from realtime database and also delete the image in the storage
-                val visitorId = visitor.id
-                if (visitorId != null) {
-                    // Reference to the visitor details in the Realtime Database
-                    val visitorRef = FirebaseDatabase.getInstance().getReference("Visitors").child(visitorId)
-
-                    // Reference to the visitor image in Firebase Storage
-                    val imageRef = FirebaseStorage.getInstance().getReference("Visitors").child(visitorId)
-
-                    // Show confirmation dialog
-                    val builder = AlertDialog.Builder(context)
-                    builder.setTitle("Delete Visitor")
-                    builder.setMessage("Are you sure you want to delete this visitor?")
-                    builder.setPositiveButton("Yes") { _, _ ->
-                        // Delete visitor details from Realtime Database
-                        visitorRef.removeValue().addOnSuccessListener {
-                            // Successfully deleted visitor details
-                            Toast.makeText(context, "Visitor Deleted", Toast.LENGTH_SHORT).show()
-
-                            // Delete visitor image from Firebase Storage
-                            imageRef.delete().addOnSuccessListener {
-                                // Successfully deleted image
-                                Toast.makeText(context, "Visitor Image Deleted", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {
-                                // Failed to delete image
-                                Toast.makeText(context, "Failed to delete visitor image", Toast.LENGTH_SHORT).show()
-                            }
+                        // Delete visitor image from Firebase Storage
+                        imageRef.delete().addOnSuccessListener {
+                            // Successfully deleted image
+                            Toast.makeText(context, "Visitor Image Deleted", Toast.LENGTH_SHORT).show()
                         }.addOnFailureListener {
-                            // Failed to delete visitor details
-                            Toast.makeText(context, "Failed to delete visitor details", Toast.LENGTH_SHORT).show()
+                            // Failed to delete image
+                            Toast.makeText(context, "Failed to delete visitor image", Toast.LENGTH_SHORT).show()
                         }
+                    }.addOnFailureListener {
+                        // Failed to delete visitor details
+                        Toast.makeText(context, "Failed to delete visitor details", Toast.LENGTH_SHORT).show()
                     }
-                    builder.setNegativeButton("No", null)
-                    builder.show()
                 }
-            }
-            //removing the delete button if the status is approved
-            if (userType=="Teacher" || userType=="Guard" && visitor.approved=="true"){
-                holder.btnDelete.visibility=View.GONE
+                builder.setNegativeButton("No", null)
+                builder.show()
             }
         }
 
     }
-
 
     override fun getItemCount(): Int {
         return visitors.size
@@ -335,5 +306,4 @@ class VisitorAdapter(private val context: Context, private var visitors: Mutable
             callback(null)
         }
     }
-
 }

@@ -60,7 +60,7 @@
         android:autofillHints=""
         android:background="@drawable/input_background_selector"
         android:drawableStart="@drawable/baseline_input_24"
-        android:hint="@string/email"
+        android:hint="User ID"
         android:inputType="textEmailAddress"
         android:padding="16dp"
         android:textColor="#FFFFFF"

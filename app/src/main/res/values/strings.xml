@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Christ Visitor</string>
+    <string name="app_name">CU-MyGate</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string-array name="gate_array">
         <item>Gate 1</item>

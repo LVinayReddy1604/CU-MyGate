@@ -56,6 +56,13 @@ class SecurityApprovedActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        if (isValidDate(selectedDate)) {
+            loadVisitorsByDate(selectedDate)
+        } else {
+            visitors.clear()
+            visitorAdapter.notifyDataSetChanged()
+        }
+
         etDate.setOnClickListener { showDatePicker() }
     }
 

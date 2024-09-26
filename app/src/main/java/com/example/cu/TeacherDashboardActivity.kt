@@ -88,6 +88,14 @@ class TeacherDashboardActivity : AppCompatActivity() {
 
         val sh = getSharedPreferences(keyNAME, MODE_PRIVATE)
         user = sh.getString("user", "").toString()
+
+        if (user == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
         databaseReference.child("login").addListenerForSingleValueEvent(object : ValueEventListener {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {

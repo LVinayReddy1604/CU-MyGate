@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.lang.Exception
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
@@ -81,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Validate email and password fields
             if (user.isEmpty()) {
-                emailEditText.error = "Email is required"
+                emailEditText.error = "ID is required"
                 emailEditText.requestFocus()
                 return@setOnClickListener
             }
@@ -96,6 +97,7 @@ class LoginActivity : AppCompatActivity() {
             databaseReference.child("login").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     // Check if username exists in DB
+                    try{
                     if (snapshot.hasChild(user)) {
                         val dbpass = snapshot.child(user).child("pass").value
                         if (dbpass.toString() == password.toString()) {
@@ -139,6 +141,9 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         Toast.makeText(this@LoginActivity, "No user Found", Toast.LENGTH_SHORT).show()
+                    }
+                    }catch(e: Exception) {
+                        Toast.makeText(this@LoginActivity, "Please Use the ID to login", Toast.LENGTH_SHORT).show()
                     }
                 }
 

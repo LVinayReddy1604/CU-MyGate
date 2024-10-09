@@ -17,7 +17,6 @@
         android:backgroundTint="#FFFFFF"
         android:focusable="false"
         android:hint="DD/MM/YYYY"
-        android:inputType="none"
         android:textColor="#FFFFFF"
         android:textColorHint="#AAAAAA"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,96 +1,42 @@
 package com.example.cu
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-@OptIn(ExperimentalGetImage::class)
-class SecurityDashboardActivity : AppCompatActivity() {
-
-    private lateinit var backButton: ImageView
-    private lateinit var startScanningButton: Button
-    private lateinit var scannedResultTextView: TextView
-    private lateinit var addVisitorButton: Button
-    private lateinit var viewApprovedVisitorsButton: Button
-    private lateinit var user: String
-
-    private val keyNAME = "MYGATE_CRED"
-    private val keyUSERNAME = "user"
-    private val keyTYPE = "type"
-
-    private lateinit var sharedPreferences: SharedPreferences
+class QR_scanner : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var barcodeScanner: BarcodeScanner
 
-    private val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Visitors")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_security_dashboard)
-
-        // Initialize views
-        backButton = findViewById(R.id.backButton)
-        startScanningButton = findViewById(R.id.btnStartScanning)
-        scannedResultTextView = findViewById(R.id.tvScannedResult)
-        addVisitorButton = findViewById(R.id.btnAddVisitor)
-        viewApprovedVisitorsButton = findViewById(R.id.btnViewApprovedVisitors)
-
-        // Set click listener for back button
-        backButton.setOnClickListener {
-            sharedPreferences = getSharedPreferences(keyNAME, MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putString(keyUSERNAME, null)
-            editor.putString(keyTYPE, null)
-            editor.apply()
-            startActivity(Intent(this, LoginActivity::class.java))
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_qr_scanner)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
 
-        val sh = getSharedPreferences(keyNAME, MODE_PRIVATE)
-        user = sh.getString("user", "").toString()
-
-        // Set click listener for Add Visitor button
-        addVisitorButton.setOnClickListener {
-            val intent = Intent(this, DirectFormActivity::class.java)
-            intent.putExtra("id", user)
-            startActivity(intent)
-        }
-
-        // Set click listener for View Approved Visitors button
-        viewApprovedVisitorsButton.setOnClickListener {
-            viewApprovedVisitors()
-        }
-
-        // Initialize camera executor
         cameraExecutor = Executors.newSingleThreadExecutor()
-
-        // Set click listener for Start Scanning button
-        startScanningButton.setOnClickListener {
-//            startQRCodeScanner()
-            val intent=Intent(this,QR_scanner::class.java)
-                startActivity(intent)
-        }
+        startQRCodeScanner()
     }
 
     private fun startQRCodeScanner() {
@@ -176,7 +122,7 @@ class SecurityDashboardActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finishAffinity()
+        startActivity(Intent(this,SecurityDashboardActivity::class.java))
     }
 
     override fun onDestroy() {

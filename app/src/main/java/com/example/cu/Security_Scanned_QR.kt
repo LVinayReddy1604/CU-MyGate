@@ -240,6 +240,6 @@ class Security_Scanned_QR : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        startActivity(Intent(this,SecurityDashboardActivity::class.java))
     }
 }
